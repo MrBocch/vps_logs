@@ -12,7 +12,7 @@ def tally_logs(file)
       # day = s[1]
       # time = s[2]
       # machine = s[3]
-      # proc = s[4]
+      proc = s[4]
       sshd << s[5..s.size].join(' ') if proc.start_with?('sshd')
     end
 
@@ -33,7 +33,7 @@ end
 def writeCSV(file, header, tally)
   File.open("csv/#{file}.csv", 'w+') do |f|
     f.write(header)
-    tally.sort_by{|k,v| -v}.each do |l|
+    tally.sort_by{|k,v| [-v, k] }.each do |l|
       f.write "\n#{l[0]},#{l[1]}"
     end
   end
