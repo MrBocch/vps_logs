@@ -8,13 +8,14 @@ def tally_logs(file)
     sshd = []
     f.each_line do |line|
       s = line.split(' ')
-      month = s[0]
-      day = s[1]
-      time = s[2]
-      machine = s[3]
-      proc = s[4]
+      # month = s[0]
+      # day = s[1]
+      # time = s[2]
+      # machine = s[3]
+      # proc = s[4]
       sshd << s[5..s.size].join(' ') if proc.start_with?('sshd')
     end
+
     sshd.each do |s|
       log = s.split(" ")
       cmd = log[0]
@@ -25,6 +26,7 @@ def tally_logs(file)
       end
     end
   end
+
   return [users, ips, ports]
 end
 
